@@ -36,6 +36,12 @@ function showData(data) {
   }
 }
 
+function getMoreSongs(url) {
+  fetch(`https://cors-anywhere.herokuapp.com/${url}`)
+    .then(res => res.json())
+    .then(data => showData(data));
+}
+
 // Event Listeners
 form.addEventListener('submit', e => {
   e.preventDefault();
