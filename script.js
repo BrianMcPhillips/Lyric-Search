@@ -8,9 +8,28 @@ const apiURL = 'https://api.lyrics.ovh';
 function searchSongs(term) {
   fetch(`${apiURL}/suggest/${term}`)
     .then(res => res.json())
-    .then(data => console.log(data));
+    .then(data => showData(data));
+}
 
-  showData(data);
+function showData(data) {
+  let output = '';
+  data.data.forEach(song => {
+    output += `
+      <li>
+        <span><strong>${song.artist.name}</strong> - ${song.title}</span>
+        <button 
+          class="btn" 
+          data-artist="${song.artist.name}"
+          data-songtitle="${song.title}">Get Lyrics</button>
+      </li>
+    `;
+  });
+
+  result.innerHTML = `
+    <ul class="songs">
+      ${output}
+    </ul>
+  `;
 }
 
 // Event Listeners
